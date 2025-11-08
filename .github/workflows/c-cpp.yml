@@ -1,0 +1,35 @@
+# .github/workflows/cpp-tests.yml
+# -----------------------------------------------------------
+# GitHub Actions workflow to automatically compile and run
+# Catch2-based C++ unit tests whenever code is pushed or a
+# pull request is created.
+
+name: C++ Unit Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository contents
+      - uses: actions/checkout@v4
+
+      # Step 2: Install build tools (GCC / G++)
+      - name: Install build tools
+        run: sudo apt-get update && sudo apt-get install -y g++
+
+      # Step 3: Compile the test executable
+      # - Uses the Catch2 v3 amalgamated files
+      - name: Build tests
+        working-directory: ./
+        run: |
+          g++ -std=c++17 catch_amalgamated.cpp test_stringcalculator.cpp stringcalculator.cpp -o tests
+
+      # Step 4: Run the Catch2 tests with verbose output
+      - name: Run unit tests
+        working-directory: ./
+        run: ./tests -s -v high
