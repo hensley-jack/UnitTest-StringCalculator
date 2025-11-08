@@ -21,7 +21,7 @@ TEST_CASE("Modulus works", "[modulus]") {
 
 TEST_CASE("Exponent function works", "[power]") {
     REQUIRE(power("2", "2") == 4); //base
-    REQUIRE(power("10", "-2") == 0.1); //edge (negative exponent)
+    REQUIRE(power("10", "-2") == 0.01); //edge (negative exponent)
     REQUIRE_THROWS_AS(power("ten", "one"), std::invalid_argument); //error case
 }
 
