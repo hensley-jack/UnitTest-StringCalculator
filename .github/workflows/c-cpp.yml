@@ -25,11 +25,11 @@ jobs:
       # Step 3: Compile the test executable
       # - Uses the Catch2 v3 amalgamated files
       - name: Build tests
-        working-directory: StringCalculator
+        working-directory: ./
         run: |
           g++ -std=c++17 catch_amalgamated.cpp test_stringcalculator.cpp stringcalculator.cpp -o tests
 
       # Step 4: Run the Catch2 tests with verbose output
       - name: Run unit tests
-        working-directory: cpp-unit-test
+        working-directory: ./
         run: ./tests -s -v high
